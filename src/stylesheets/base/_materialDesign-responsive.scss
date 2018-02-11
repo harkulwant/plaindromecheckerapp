@@ -1,0 +1,45 @@
+// _materialDesign-responsive.scss
+
+@import '_materialDesign-variables';
+@import '_mixins';
+
+
+
+
+// @include media("screen", ">=desktop") {
+//   .container{
+//     max-width: 50rem;
+//   }
+// }
+
+
+// @include media("screen", ">=tablet", "<desktop") {
+//   .container{
+//     max-width: 70rem;
+//   }
+// }
+
+// @include media("screen", ">=phone", "<tablet") {
+//   .container{
+//     max-width: 80rem;
+//   }
+// }
+
+
+// @include media("screen", "<phone") {
+    
+//   .navbar{
+//     padding: 2rem 1rem;
+      
+//       img {
+//         width: 50%;
+//       }
+//   }
+
+// }
+
+// @include media("handheld", "<phone") {
+//   .container{
+//     max-width: 95rem;
+//   }
+// }

@@ -1,0 +1,10 @@
+
+@import '../base/_materialDesign-variables';
+@import '../base/_mixins';
+
+
+.fill-screen{
+  // background-image: url('http://store.creditstar.com.au/assets/wallpapers/cliff-road-20180211.jpg');
+  background-size:cover;
+  background-position: center;
+}

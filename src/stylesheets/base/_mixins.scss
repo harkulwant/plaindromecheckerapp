@@ -1,0 +1,71 @@
+
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+
+
+// https://css-tricks.com/approaches-media-queries-sass/
+// custom media-queries
+$breakpoints:(phone: 640px, 
+              tablet: 768px, 
+              desktop: 1024px) !default;
+
+$media-expressions: (screen: "only screen",
+                    print: "only print",
+                    handheld: "handheld",
+                    retina:("(-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-device-pixel-ratio: 1.5), (min-resolution: 120dpi)"),
+                    retina2x: ("(-webkit-min-device-pixel-ratio: 2), (min--moz-device-pixel-ratio: 2), (min-device-pixel-ratio: 2), (min-resolution: 192dpi)")) !default;
+
+
+$breakpoint-phone: map-get($breakpoints, phone);
+$breakpoint-tablet: map-get($breakpoints, tablet);
+$breakpoint-desktop: map-get($breakpoints, desktop);
+
+$media-expressions-screen: map-get($media-expressions, screen);
+$media-expressions-print: map-get($media-expressions, print);
+$media-expressions-handheld: map-get($media-expressions, handheld);
+$media-expressions-retina: map-get($media-expressions, retina);
+$media-expressions-retina2x: map-get($media-expressions, retina2x);
+
+@function translate-media-condition($c) {
+  $condMap: (
+    "screen": "#{$media-expressions-screen}",
+    "print": "#{$media-expressions-print}",
+    "handheld": "#{$media-expressions-handheld}",
+    "retina": "#{$media-expressions-retina}",
+    "retina2x":"#{$media-expressions-retina2x}",
+    ">phone": "(min-width: #{$breakpoint-phone + 1})",
+    ">=phone": "(min-width: #{$breakpoint-phone})",
+    "<phone": "(max-width: #{$breakpoint-phone - 1})",
+    "<=phone": "(max-width: #{$breakpoint-phone })",        
+    ">tablet": "(min-width: #{$breakpoint-tablet + 1})",
+    ">=tablet": "(min-width: #{$breakpoint-tablet})",
+    "<tablet": "(max-width: #{$breakpoint-tablet - 1})",
+    "<=tablet": "(max-width: #{$breakpoint-tablet })",
+    ">desktop": "(min-width: #{$breakpoint-desktop + 1})",
+    ">=desktop": "(min-width: #{$breakpoint-desktop})",
+    "<desktop": "(max-width: #{$breakpoint-desktop - 1})"
+  );
+  @return map-get( $condMap, $c );
+}
+
+// The media mixin
+@mixin media($args...) {
+  $query: "";
+
+  @each $arg in $args {
+    $op: "";
+  
+    @if ( $query != "" ) {
+      $op: " and ";
+    }
+    $query: $query + $op + translate-media-condition($arg);
+  }
+
+  @media #{$query}  { @content; }
+}
