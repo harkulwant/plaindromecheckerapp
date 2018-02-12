@@ -79,10 +79,10 @@ updateLeadState(event){
             <label className="tgl">
               <input type="checkbox" defaultChecked={this.state.groupAndSort} onChange={this.toggleChange} />
               <span className="tgl_body">
-                <span className="tgl_switch"></span>
+                <span className="tgl_switch"/>
                 <span className="tgl_track">
-                  <span className="tgl_bgd"></span>
-                  <span className="tgl_bgd tgl_bgd-negative"></span>
+                  <span className="tgl_bgd"/>
+                  <span className="tgl_bgd tgl_bgd-negative"/>
                 </span>
               </span>
             </label>
