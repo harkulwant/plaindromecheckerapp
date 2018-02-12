@@ -26,19 +26,3 @@ fs.readFile('src/index.html', 'utf8', (err, markup) => {
     console.log('index.html written to /dist'.green);
   });
 });
-
-
-fs.readFile('src/privacy-policy.htm', 'utf8', (err, markup) => {
-  if (err) {
-    return console.log(err);
-  }
-
-  const $ = cheerio.load(markup);
-
-  fs.writeFile('dist/privacy-policy.htm', $.html(), 'utf8', function (err) {
-    if (err) {
-      return console.log(err);
-    }
-    console.log('privacy-policy.htm written to /dist'.green);
-  });
-});
