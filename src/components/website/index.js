@@ -6,11 +6,12 @@ import {connect} from 'react-redux';
 import InputBox from './../toolkit/inputBox';
 import TextArea from './../toolkit/textArea';
 import Button from './../toolkit/button';
+import GroupList from './../toolkit/groupList';
 import * as leadActions from '../../actions/leadActions';
 import {bindActionCreators} from 'redux';
 import taostr from 'toastr';
 import {withRouter} from 'react-router';
-//
+
 
 class HomePage extends React.Component{
 
@@ -21,11 +22,13 @@ class HomePage extends React.Component{
       lead: {
         id:"",
         value: ""
-      }
+      },
+      groupAndSort: true
   };
 
   this.onClickSave = this.onClickSave.bind(this);
   this.updateLeadState = this.updateLeadState.bind(this);
+  this.toggleChange = this.toggleChange.bind(this);
 }
 
 
@@ -39,7 +42,6 @@ updateLeadState(event){
 
  onClickSave(event){
     event.preventDefault();
-    this.setState({saving: true});
     this.props.actions.saveLead(this.state.lead)
       .then(() => {
         taostr.success(this.state.lead.value + ' saved');
@@ -55,8 +57,8 @@ updateLeadState(event){
       });
   }
 
-  leadRow(lead, index){
-    return <div key={index}>{lead.value}</div>;
+  toggleChange() {
+    this.setState({groupAndSort: !this.state.groupAndSort});
   }
 
 
@@ -74,7 +76,17 @@ updateLeadState(event){
         <div id="palindromeitems" className="row  fill-screen">
           <div className="container">
             <h1>Palindrome Items</h1>
-            {this.props.leads.map(this.leadRow)}
+            <label className="tgl">
+              <input type="checkbox" defaultChecked={this.state.groupAndSort} onChange={this.toggleChange} />
+              <span className="tgl_body">
+                <span className="tgl_switch"></span>
+                <span className="tgl_track">
+                  <span className="tgl_bgd"></span>
+                  <span className="tgl_bgd tgl_bgd-negative"></span>
+                </span>
+              </span>
+            </label>
+            <GroupList items={this.props.leads} groupAndSort={this.state.groupAndSort} />
           </div>
         </div>
        </div>);

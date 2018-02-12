@@ -33,7 +33,7 @@ h1 {
 	margin: 3rem auto;
 	background: $body-bg;
 	width: 90%;
-	padding: 3rem 5rem;
+	padding: 3rem 2rem;
 	border-radius: 1px;
 	
 	&::before {
@@ -463,6 +463,8 @@ a {
 
 @include media("screen", ">=tablet") {
   .container{
+  	padding: 3rem 5rem;
     max-width: 50%;
+
   }
 }
