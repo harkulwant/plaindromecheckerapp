@@ -132,7 +132,7 @@ fieldset {
 		padding-left: $mf-spacer;
 		z-index: 1;
 		color: $mf-label-color;
-		font-size: ($mf-font-size);
+		font-size: ($mf-font-size * 1.2);
 		font-weight: normal;
 		transition: all $mf-transition-speed ease;
 	}
