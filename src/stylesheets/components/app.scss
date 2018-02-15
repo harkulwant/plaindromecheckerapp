@@ -8,3 +8,24 @@
   background-size:cover;
   background-position: center;
 }
+
+.child-list {
+  color:#999;
+  display: none;
+  position: absolute;
+  top: 42px;
+  bottom: 0;
+  right: 2%;
+  z-Index: 100;
+  width:100%;
+}
+
+.child-list-hidden{
+  display:none;
+}
+
+.badge{
+    &:hover ~ .child-list{
+      display: block
+  }
+}

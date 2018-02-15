@@ -18,7 +18,7 @@ const GroupList = (props) => {
 
       return {
         value: x.value,
-        signature: signature
+        signature: signature,
       };
     });
 
@@ -33,11 +33,13 @@ const GroupList = (props) => {
     let groupByItems = Object.keys(groups).map(g => {
       let groupItems = groups[g];
       let count = groupItems.length;
+      let latestAdded = groupItems.splice(-1, 1);
+
       return {
         key: g,
-        value: groupItems[count - 1].value, // get the latest added item
+        value: latestAdded[0].value, // get the latest added item
         count: groupAndSort ? count : undefined,
-        groups: groupItems,
+        groups: groupItems.reverse(),
       };
     });
 
@@ -59,7 +61,14 @@ const GroupList = (props) => {
   return(
     <ul className="list-group">
       { groupBy(items).map((item, index) => {
-        return <li className="list-group-item justify-content-between" key={index}>{item.value}<span className="badge badge-pill badge-secondary float-right mt-2">{item.count}</span></li>;
+        return <li className="list-group-item justify-content-between" key={index}>{item.value}<span className="badge badge-pill badge-secondary float-right mt-2">{item.count}</span>
+         <div className={"" + (item.count > 1 ? 'child-list' : 'child-list-hidden')}>
+            <ul className="list-group">
+              {item.groups.map((itemGroup,idx) => { 
+                return <li key={item.signature+'.'+idx} className="list-group-item justify-content-between">{itemGroup.value}</li>; }) }
+            </ul>
+          </div>
+        </li>;
       }) }
     </ul>
   );
