@@ -45,10 +45,10 @@ const GroupList = (props) => {
       return groupByItems.reverse();
 
     return groupByItems.sort((a,b) => {
-      if(a.value < b.value)
+      if(a.key < b.key)
         return -1;
       
-      if (a.value > b.value)
+      if (a.key > b.key)
         return 1;
 
       return 0;
